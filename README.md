@@ -169,6 +169,6 @@ class DFRobot_Module:
 
 ## 高质量封库细节
 
-参考 Arduino 高质量封库细节<br>
+参考 Arduino 高质量封库细节，python 无法完成的项目不用理会 <br>
 
 https://github.com/forKnowYou/program-standard-cpp
