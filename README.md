@@ -9,21 +9,42 @@ python 封库编程规范
 * [常量命名](#常量命名)
 * [变量命名](#变量命名)
 * [函数命名与注释](#函数命名与注释)
+* [高质量封库细节](#高质量封库细节)
 
 ## 文件结构与命名
 
-库可以直接放在 Arduino 封库的根目录下，将 python 库的文档结构命名为 raspberry | micropython <br>
+库可以直接放在 Arduino 封库的根目录下，将 python 直接命名为python <br>
  <br>
 文档结构应类似如下: <br>
 <pre>
 
---raspberry:
-|   lib.py
-|   xx.py
-|   ...
-|   --examples:
-|   |   module_func.py
-|   |   ...
+--python:
+| --raspberrypi:
+| | --DFRobot_Module.py
+| | --Modele_demo_xxxx.py
+| | ......
+|
+| --esp32:
+| | --DFRobot_Module.py
+| | --Modele_demo_xxxx.py
+| | ......
+| |
+</pre>
+
+例程文件头部注释写法：<br>
+
+<pre>
+""" file 文件名（不能使用中文）
+  #
+  # 如何做这个实验，描述实验步骤（只需要下载程序就能肉眼观测到的简单小实验例如blink，这步可以不写）（不能使用中文）
+  # 实验现象是什么（不能使用中文）
+  #
+  # Copyright   [DFRobot](http://www.dfrobot.com), 2016
+  # Copyright   GNU Lesser General Public License
+  #
+  # version  V1.0
+  # date  2017-10-9
+"""
 </pre>
 
 ## 类与注释
@@ -37,7 +58,7 @@ class DFRobot_Module:
   def __init__(i2cAddr):
     """ Class constructor
 
-    :param i2cAddr Module's i2c address
+    :param i2cAddr:int Module's i2c address
     """
     pass
 
@@ -53,7 +74,7 @@ C 库中的定义：
 
 typedef enum {
   eModuleConfEnum1,
-  eModuleCOnfEnum2
+  eModuleConfEnum2
 } eModuleConf_t;
 ```
 
@@ -70,25 +91,28 @@ class DFRobot_Module:
 
 ## 变量命名
 
-私有变量名前需要加 _ <br>
-变量遵循驼峰命名法 <br>
-列表变量需要在变量名前加 l，后面的字母首字母大写并遵循驼峰命名法 <br>
-元祖变量全部用列表变量表示 <br>
-字典变量需要在变量名前加 d，后面的字母首字母大写并遵循驼峰命名法 <br>
+受保护的变量（对应 cpp 里的 protected ）名前需要加 _, 私有的变量（对应 cpp 里的 private ）名前需要加 __ <br>
+任何类型的变量和函数名都使用下划线命名规则 <br>
 
 例：
 ```py
 class DFRobot_Module:
 
-  _privateVar = 1  # 私有变量
-  _lPrivateList = [0, 1]
-  _dPrivateDict = {
+  _protect_var = 1  # 受保护的变量
+  _protect_list = [0, 1]  # 变量注释
+  _protect_dict = {
     "a": 1
   }
 
-  publicVar = 1  # 公有变量
-  lPublicList = [0, 1]
-  dPublicDict = {
+  __private_var = 1  # 私有的变量
+  __private_list = [0, 1]  # 变量注释
+  __private_dict = {
+    "a": 1
+  }
+
+  public_var = 1  # 公有变量
+  public_list = [0, 1]
+  public_dict = {
     "a": 1
   }
 
@@ -96,8 +120,8 @@ class DFRobot_Module:
 
 ## 函数命名与注释
 
-私有函数名前需要加 _ <br>
-函数名遵循驼峰命名法 <br>
+受保护的函数（对应 cpp 里的 protected ）名前需要加 _, 私有的函数（对应 cpp 里的 private ）名前需要加 __ <br>
+函数名使用下划线命名规则 <br>
 
 示例：
 ```py
@@ -106,19 +130,23 @@ class DFRobot_Module:
   def __init__(self, param1):
     """ Module init
 
-    :param param1 Set to ...
+    :param param1:int Set to ...
     """
     pass
 
-  def _privateFunc(self, param1):
+  def _private_func(self, param1):
+    """ func detail
+
+    :param param1:int Set to ...
+    """
     pass
 
-  def publickFunc(self, param1):
+  def public_func(self, param1):
     """ Check param1
 
-    :param param1 Parameter to check
+    :param param1:int Parameter to check
 
-    :return Check result
+    :return:bool Check result
       :retval True Check succeed
       :retval False Check falied
     """
@@ -130,7 +158,7 @@ class DFRobot_Module:
   POWER_ON = 0x00
   POWER_OFF = 0x01
 
-  def publicFunc2(self):
+  def public_func2(self):
     """ Return power status
 
     :return Power status
@@ -138,3 +166,9 @@ class DFRobot_Module:
     return self._powerStatus
 
 ```
+
+## 高质量封库细节
+
+参考 Arduino 高质量封库细节<br>
+
+https://github.com/forKnowYou/program-standard-cpp
