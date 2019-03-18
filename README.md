@@ -4,6 +4,7 @@ python 封库编程规范
 
 ## 索引
 
+* [参考库](#参考库)
 * [文件结构与命名](#文件结构与命名)
 * [类与注释](#类与注释)
 * [常量命名](#常量命名)
@@ -11,11 +12,15 @@ python 封库编程规范
 * [函数命名与注释](#函数命名与注释)
 * [高质量封库细节](#高质量封库细节)
 
+## 参考库
+
+https://github.com/DFRobot/DFRobot_RaspberryPi_Motor <br>
+
 ## 文件结构与命名
 
-库可以直接放在 Arduino 封库的根目录下，将 python 直接命名为python <br>
+库可以直接放在 Arduino 封库的根目录下，将 python 直接命名为 python <br>
  <br>
-文档结构应类似如下: <br>
+文档结构应类似如下，如果不与 Arduino 一起使用，则直接将原本 python 文件夹下的内容放在根目录下: <br>
 <pre>
 
 --python:
@@ -29,6 +34,7 @@ python 封库编程规范
 | | --Modele_demo_xxxx.py
 | | ......
 | |
+
 </pre>
 
 例程文件头部注释写法：<br>
@@ -58,7 +64,7 @@ class DFRobot_Module:
   def __init__(i2cAddr):
     """ Class constructor
 
-    :param i2cAddr:int Module's i2c address
+    :param i2cAddr    Module's i2c address
     """
     pass
 
@@ -66,7 +72,7 @@ class DFRobot_Module:
 
 ## 常量命名
 
-C 库中的宏，包括枚举变量在 python 中需要写在类的全局变量中，并所有字母大写
+C 库中的宏，包括枚举变量在 python 中需要写在类的全局变量中，全部使用小写字母和下划线组合
 
 C 库中的定义：
 ```cpp
@@ -82,17 +88,17 @@ typedef enum {
 ```py
 class DFRobot_Module:
 
-  CONF = 0x00
+  conf = 0x00
 
-  CONF_ENUM1 = 0x00
-  CONF_ENUM2 = 0x01
+  conf_enum1 = 0x00
+  conf_enum2 = 0x01
 
 ```
 
 ## 变量命名
 
 受保护的变量（对应 cpp 里的 protected ）名前需要加 _, 私有的变量（对应 cpp 里的 private ）名前需要加 __ <br>
-任何类型的变量和函数名都使用下划线命名规则 <br>
+任何类型的变量和函数名都使用下划线加小写字母命名规则 <br>
 
 例：
 ```py
@@ -121,7 +127,7 @@ class DFRobot_Module:
 ## 函数命名与注释
 
 受保护的函数（对应 cpp 里的 protected ）名前需要加 _, 私有的函数（对应 cpp 里的 private ）名前需要加 __ <br>
-函数名使用下划线命名规则 <br>
+函数名使用下划线加小写字母命名规则 <br>
 
 示例：
 ```py
