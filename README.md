@@ -72,7 +72,7 @@ class DFRobot_Module:
 
 ## 常量命名
 
-C 库中的宏，包括枚举变量在 python 中需要写在类的全局变量中，全部使用小写字母和下划线组合
+C 库中的宏，包括枚举变量在 python 中需要写在类的全局变量中，全部使用大写字母和下划线组合
 
 C 库中的定义：
 ```cpp
@@ -88,10 +88,10 @@ typedef enum {
 ```py
 class DFRobot_Module:
 
-  conf = 0x00
+  _REG_CONF = 0x00
 
-  conf_enum1 = 0x00
-  conf_enum2 = 0x01
+  CONF_ENUM1 = 0x00
+  CONF_ENUM2 = 0x01
 
 ```
 
